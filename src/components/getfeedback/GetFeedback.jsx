@@ -8,6 +8,12 @@ class GetFeedback extends Component {
     bad: 0,
   };
 
+  handleClick = rate => {
+    this.setState(prevState => ({
+      [rate]: prevState[rate] + 1,
+    }));
+  };
+
   getRateColor = rate => {
     switch (rate) {
       case 'good':
@@ -29,18 +35,36 @@ class GetFeedback extends Component {
       <div className={css.container}>
         <div className={css.box}>
           <h2 className={css.header}>Please leave feedback</h2>
-          {rating.map((rate, index) => (
-            <button
-              type="button"
-              className={css.ratingButtons}
-              style={{
-                backgroundColor: this.getRateColor(rate),
-              }}
-              key={index}
-            >
-              {rate}
-            </button>
-          ))}
+          <button
+            type="button"
+            onClick={() => this.handleClick(rating[0])}
+            className={css.ratingButtons}
+            style={{
+              backgroundColor: this.getRateColor(rating[0]),
+            }}
+          >
+            {rating[0]}
+          </button>
+          <button
+            type="button"
+            onClick={() => this.handleClick(rating[1])}
+            className={css.ratingButtons}
+            style={{
+              backgroundColor: this.getRateColor(rating[1]),
+            }}
+          >
+            {rating[1]}
+          </button>
+          <button
+            type="button"
+            onClick={() => this.handleClick(rating[2])}
+            className={css.ratingButtons}
+            style={{
+              backgroundColor: this.getRateColor(rating[2]),
+            }}
+          >
+            {rating[2]}
+          </button>
         </div>
 
         <div className={css.box}>
