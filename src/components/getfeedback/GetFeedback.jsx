@@ -1,3 +1,4 @@
+import css from './getfeedback.module.css';
 const { Component } = require('react');
 
 class GetFeedback extends Component {
@@ -7,30 +8,69 @@ class GetFeedback extends Component {
     bad: 0,
   };
 
+  getRateColor = rate => {
+    switch (rate) {
+      case 'good':
+        return '#469A49';
+      case 'neutral':
+        return '#FAD02C';
+      case 'bad':
+        return '#E12A2A';
+      default:
+        throw new Error(`Rating type is not recognized.`);
+    }
+  };
+
   render() {
     const rating = Object.keys(this.state);
     const { good, neutral, bad } = this.state;
 
     return (
-      <>
-        <h2>Please leave feedback</h2>
-        {rating.map((rate, index) => (
-          <button type="button" key={index}>
-            {rate}
-          </button>
-        ))}
+      <div className={css.container}>
+        <div className={css.box}>
+          <h2 className={css.header}>Please leave feedback</h2>
+          {rating.map((rate, index) => (
+            <button
+              type="button"
+              className={css.ratingButtons}
+              style={{
+                backgroundColor: this.getRateColor(rate),
+              }}
+              key={index}
+            >
+              {rate}
+            </button>
+          ))}
+        </div>
 
-        <h2>Statistics</h2>
-        <span>
-          {rating[0]}: {good}
-        </span>
-        <span>
-          {rating[1]}: {neutral}
-        </span>
-        <span>
-          {rating[2]}: {bad}
-        </span>
-      </>
+        <div className={css.box}>
+          <h2 className={css.header}>Statistics</h2>
+          <span
+            className={css.statistic}
+            style={{
+              color: this.getRateColor(rating[0]),
+            }}
+          >
+            {rating[0]}: {good}
+          </span>
+          <span
+            className={css.statistic}
+            style={{
+              color: this.getRateColor(rating[1]),
+            }}
+          >
+            {rating[1]}: {neutral}
+          </span>
+          <span
+            className={css.statistic}
+            style={{
+              color: this.getRateColor(rating[2]),
+            }}
+          >
+            {rating[2]}: {bad}
+          </span>
+        </div>
+      </div>
     );
   }
 }
