@@ -14,6 +14,17 @@ class GetFeedback extends Component {
     }));
   };
 
+  countTotalFeedback = () => {
+    const total = this.state.good + this.state.neutral + this.state.bad;
+    return total;
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    const total = this.countTotalFeedback();
+    const goodPercentage = Math.floor((this.state.good * 100) / total);
+    return goodPercentage;
+  };
+
   getRateColor = rate => {
     switch (rate) {
       case 'good':
@@ -70,7 +81,7 @@ class GetFeedback extends Component {
         <div className={css.box}>
           <h2 className={css.header}>Statistics</h2>
           <span
-            className={css.statistic}
+            className={css.rateStatistic}
             style={{
               color: this.getRateColor(rating[0]),
             }}
@@ -78,7 +89,7 @@ class GetFeedback extends Component {
             {rating[0]}: {good}
           </span>
           <span
-            className={css.statistic}
+            className={css.rateStatistic}
             style={{
               color: this.getRateColor(rating[1]),
             }}
@@ -86,13 +97,23 @@ class GetFeedback extends Component {
             {rating[1]}: {neutral}
           </span>
           <span
-            className={css.statistic}
+            className={css.rateStatistic}
             style={{
               color: this.getRateColor(rating[2]),
             }}
           >
             {rating[2]}: {bad}
           </span>
+          <span className={css.totalStatistic}>
+            Total: {this.countTotalFeedback()}
+          </span>
+          {this.countPositiveFeedbackPercentage() ? (
+            <span className={css.totalStatistic}>
+              Positive rates: {this.countPositiveFeedbackPercentage()}%
+            </span>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     );
