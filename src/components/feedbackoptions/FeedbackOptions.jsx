@@ -1,5 +1,6 @@
 import { getRateColor } from 'components/getratecolor';
 import css from './feedbackoptions.module.css';
+import PropTypes, { string } from 'prop-types';
 
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
@@ -21,4 +22,9 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
       })}
     </>
   );
+};
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.arrayOf(string),
+  onLeaveFeedback: PropTypes.func,
 };
