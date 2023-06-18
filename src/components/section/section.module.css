@@ -1,0 +1,13 @@
+.box {
+  background-color: #d0b49f;
+  padding: 2rem;
+  margin: 2rem 0;
+  border-radius: 2rem;
+}
+
+.header {
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #523a28;
+  color: #523a28;
+}
